@@ -1,0 +1,11 @@
+**/venv
+**/venv/
+**/tmp
+**/tmp/
+/venv
+/venv/** 
+**/__pycache__
+**/__pycache__/
+sol/** 
+**/.DS_Store
+**/*.db

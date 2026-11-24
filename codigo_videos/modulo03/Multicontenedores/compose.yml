@@ -1,0 +1,27 @@
+services:
+
+  python:
+    build: ./python-api
+    environment:
+      - DIRECTORY=/app/messages
+    volumes:
+      - message:/app/messages
+    expose:
+      - 8000
+    networks:
+      - my-net
+
+  java:
+    build: ./java-api
+    ports:
+      - "8000:8080"
+    environment:
+      - PYTHON_URL_PORT=python:8000
+    networks:
+      - my-net
+
+volumes:
+  message:
+
+networks:
+  my-net:

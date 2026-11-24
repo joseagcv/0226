@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-service
+  namespace: java-app
+spec:
+  selector:
+    app: python-app
+  ports:
+    - protocol: TCP
+      port: 7000
+      targetPort: 8000

@@ -1,0 +1,27 @@
+ARG WORKDIR=/app
+
+FROM maven:3.9.9-eclipse-temurin-21-alpine AS build
+
+ARG WORKDIR
+
+WORKDIR $WORKDIR
+
+COPY ./src-java ./src
+
+RUN cd src && mvn clean && \
+    mvn package && \
+    cp target/*.jar ./../springapp.jar
+
+FROM openjdk:17.0.1-jdk-slim
+
+ARG WORKDIR
+
+WORKDIR $WORKDIR
+
+COPY --from=build /app/springapp.jar ./springapp.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "./springapp.jar"]
+
+
