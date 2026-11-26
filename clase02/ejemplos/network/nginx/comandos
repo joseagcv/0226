@@ -1,4 +1,4 @@
-docker run -d -p 8081:80 nginx
+docker run -d -p nginx
 
 directorio de los estaticos nginx: /usr/share/nginx/html
 
