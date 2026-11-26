@@ -1,0 +1,23 @@
+JWT: Json Web Token.
+
+Es una manera de compartir información de manera segura entre aplicaciones. Sirve para autenticar (Verificar quien o que eres) y para Autorizar
+(lo que puedes hacer). Se compone de tres partes y tiene el siguiente formato:
+
+xxxxx.yyyyy.zzzzz
+
+La primera parte (xxxxx) se llama Header, y contiene metadatos sobre el algoritmo de firma utilizado.
+La segunda parte (yyyyy) se le conoce como payload, aquí solemos poner información relevante para la autorizacion/autenticación. Es importante no poner
+NINGÚN dato sensible ya que NO va encriptado, solo está en formato base64.
+La tercera parte (zzzzz) es el resultado de la siguiente operaciñon:
+
+signature = HMACSHA256(
+    base64UrlEncode(header) + "." + base64UrlEncode(payload),
+    secret_key
+)
+
+Esta última parte es la que hace que el JWT sea seguro ya que, a pesar de poder ver su contenido, podemos confiar que fue emitido por un servidor de confianzaz
+y que no se puede alterar. Esto es gracias a la firma junto al secret_key. Si esta key se filtra, no vale de nada el JWT.
+
+
+
+Dicho esto, la tarea es generar un secret por vuestra cuenta, construir una aplicación Docker y subirla a vuestra cuenta de docker hub!

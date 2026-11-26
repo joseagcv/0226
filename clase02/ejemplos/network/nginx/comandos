@@ -1,0 +1,8 @@
+docker run -d -p 8081:80 nginx
+
+directorio de los estaticos nginx: /usr/share/nginx/html
+
+
+docker run -d --name alpine1 -v $(pwd)/:/app/data -v mivol:/app/copy alpine sleep infinity
+
+docker run -d -p 8081:80 -v mivol:/usr/share/nginx/html nginx

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pets</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .pet {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: #c00;
+        }
+
+        #loading {
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pets</h1>
+
+    <div id="loading">Cargando mascotas...</div>
+    <div id="pets"></div>
+    <div id="error" class="error"></div>
+
+    <script>
+        // Esta variable será sustituida al arrancar el contenedor
+        const API_URL = "${API_URL}";
+
+        async function loadPets() {
+            const loading = document.getElementById("loading");
+            const petsContainer = document.getElementById("pets");
+            const errorContainer = document.getElementById("error");
+
+            try {
+                const response = await fetch(`${API_URL}/mascotas`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const pets = await response.json();
+
+                loading.style.display = "none";
+
+                pets.forEach(pet => {
+                    const element = document.createElement("div");
+                    element.className = "pet";
+
+                    element.innerHTML = `
+                        <strong>${pet.name ?? "Sin nombre"}</strong>
+                        <div>Especie: ${pet.species ?? "Desconocida"}</div>
+                    `;
+
+                    petsContainer.appendChild(element);
+                });
+
+            } catch (error) {
+                loading.style.display = "none";
+                errorContainer.textContent =
+                    `No se pudieron cargar las mascotas: ${error.message}`;
+            }
+        }
+
+        loadPets();
+    </script>
+</body>
+</html>

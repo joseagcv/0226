@@ -1,0 +1,21 @@
+La idea del ejercicio es "Jugar" un poco con docker network y docker-compose.
+
+1. Crear una red del tipo bridge
+1. Arrancar un contenedor Mariadb o PostgresSQL (No tiene que ser ambos). Más abajo está el comando utilizado para arrancar un contenedor 
+de esas bases de datos. Es importante que le pongáis un nombre, por ejemplo "mariadb-contenedor", pero puede ser cualquiera-
+2. Construir la imagen Docker de la app que se encuentra en la carpeta correspondiente a la base de datos elegida. Ej, Si elegiste mariadb, pues app-mariadb
+3. Arrancarla con la variable de entorno requerida para la conexión de la base de datos (abajo se encuentran). Teneis que conectaros a la base de datos correspondiente
+utilizando el nombre que le habéis asignado en el paso 1.
+
+- - -
+Aquí Os dejo ejemplos de como levantar un contenedor con diferentes bases de datos:
+
+  Mariadb:
+
+    docker run -d -e MARIADB_ROOT_PASSWORD=root123456  -e MARIADB_DATABASE=users  -e MARIADB_USER=fastapi_user  -e MARIADB_PASSWORD=secret123  -p 3306:3306  mariadb:latest
+    Cadena de conexión: "mariadb+mariadbconnector://fastapi_user:secret123@localhost:3306/users"
+  
+  PostgresSQL:
+
+    docker run -d -e POSTGRES_USER=users -e POSTGRES_PASSWORD=secret123 -e POSTGRES_DB=users -p 5432:5432 postgres:16
+    Cadena de conexión: "postgresql+psycopg2://fastapi_user:secret123@localhost:5432/users" 

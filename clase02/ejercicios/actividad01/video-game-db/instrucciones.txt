@@ -1,0 +1,13 @@
+Esta aplicación está esperando ser conectada a una instancia de un contenedor mongo:7. Las tareas son:
+
+## CUIDADO: En este ejercicio NO se permite la creación de redes de docker.
+
+    1. Encontrar las variables de entorno que requiere la aplicacion para funcionar correctamente.
+    2. Arrancar un contenedor de mongo. Por defecto, mongo escucha conexiones en el puerto 27017
+    3. Arranacar la aplicacion en un entorno virtualizado de python y que esta se conecte a la intancia de mongo.
+    4. Verificar que funciona la creacion en el /docs de la aplicación, al igual que el listado de todo lo creado.
+    5. Parar la aplicacion y borrar el contenedor de mongo
+    6. Montar un volumen creado y gestionado por docker. Montarlo en una imagen de mongo en /data/db
+    7. Repetir todo y verificar como a pesar de borrar el contenedor y recrearlo (usando el mismo volumen), los datos persisten.
+
+Para acceder a cosas en nuestro host de docker, debemos usar el dominio host.docker.internal
